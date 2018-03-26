@@ -7,15 +7,15 @@
     "folds" : "",
     "hash" : "1141292180",
     "id" : "78601407",
-    "lastKnownWriteTime" : 1522092451,
-    "last_content_update" : 1522092451887,
-    "path" : "C:/localhost/99-Personal/Internal Applications/go_properly/code/readme.Rmd",
-    "project_path" : "readme.Rmd",
+    "lastKnownWriteTime" : 1522093149,
+    "last_content_update" : 1522093149770,
+    "path" : "C:/localhost/99-Personal/Internal Applications/go_properly/code/readme.md",
+    "project_path" : "readme.md",
     "properties" : {
         "tempName" : "Untitled1"
     },
     "relative_order" : 6,
     "source_on_save" : false,
     "source_window" : "",
-    "type" : "r_markdown"
+    "type" : "markdown"
 }
