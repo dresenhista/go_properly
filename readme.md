@@ -91,9 +91,6 @@ The data we are working on looks like the sample below:
 
 And before we start, it is important to understand outliers and how the
 sold.Price values are distribuited. A box plo9t helps to see that:
-
-    boxplot(training$Sold.Price)
-
 ![](readme_files/figure-markdown_strict/unnamed-chunk-2-1.png)
 
 We can see that there are a few houses skewed towards the $2M value. In
