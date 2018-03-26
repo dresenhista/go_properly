@@ -114,7 +114,7 @@ With the exception of one house, the model is predicting the price correctly (wi
 #print(testing(testing$percentage>10))
 testing[testing$percentage>=10,]
 ```
-Basically when the Realtor typed the number of parking spots there was a mistake (it is almost impossible one house to have 1423 parking spots) and therefore the model is having a hard time to predict the price.
+Basically when the Realtor typed the number of parking spots there was a mistake (it is almost impossible one house to have 4321 parking spots) and therefore the model is having a hard time to predict the price.
 
 
 We can also take a look at the distributions of correctness of my model using the table below:

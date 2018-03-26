@@ -185,7 +185,7 @@ see what is happening with that one house:
     ## 118        6121488   14.69612
 
 Basically when the Realtor typed the number of parking spots there was a
-mistake (it is almost impossible one house to have 1423 parking spots)
+mistake (it is almost impossible one house to have 4321 parking spots)
 and therefore the model is having a hard time to predict the price.
 
 We can also take a look at the distributions of correctness of my model
