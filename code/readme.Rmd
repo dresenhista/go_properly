@@ -3,13 +3,9 @@ title: "House Pricing problem: Calgary"
 author: "Andresa Andrade"
 date: "March 26, 2018"
 output:
-  html_document: default
-  pdf_document: default
+  md_document: default
 ---
 
-```{r setup, include=FALSE}
-
-```
 
 ## Trying to solve the House Pricing problem: Calgary
 ##Problem
