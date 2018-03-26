@@ -1,5 +1,5 @@
 ---
-title: "House Pricing problem: Calgary"
+title: 'House Pricing problem: Calgary'
 author: "Andresa Andrade"
 date: "March 26, 2018"
 output:
