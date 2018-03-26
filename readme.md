@@ -4,11 +4,11 @@ Trying to solve the House Pricing problem: Calgary
 Problem
 -------
 
-At a high level we are building a residential real estate marketplace in
-which we will be buying and selling homes (for which we will be setting
-the price). Our model needs to tell us which homes to buy, and provide
-us with comfort that for the homes we do buy, we know what price we can
-resell them for and how long it will take to do so.
+At a high level, we are building a residential real estate marketplace
+in which we will be buying and selling homes and set the price. Our
+model needs to tell us which homes to buy, and provide us with comfort
+that for the homes we do buy, we know what price we can resell them for
+and how long it will take to do so.
 
 In this folder you can see the sample data from Calgary (just historical
 sales data from the MLS). **The goal is to take an initial (v0) model
@@ -22,41 +22,49 @@ with more time.
 Steps to model
 --------------
 
-Before we start, I need to point it out two personnal preferences: I
-usually like doing modeling with dataframe structures. And I am using R
+Before we start, I need to point it out two personal preferences: I
+usually like doing modeling with data frame structures. And I am using R
 and python in this project: Python to clean the data and R to model it.
 
-1.  Read the json type of file and translate into dataframes we will be
-    using the cleaning\_file.py file in this directory to perform this
-    step
+1.  Read the json type of file and translate into data frames we will be
+    using the cleaning\_file.py file in the /code directory to perform
+    this step
 
 2.Import the desired files into R. It is best practice to split the data
 into training and testing. For the purposes of this project I decided to
 use one file to test and one to train, but you can use as many as you
 want, but they should not overlap. In other words, whatever was used to
 train should not be used to test. This will avoid bias towards the
-model.
+model. For this project i decided to use file 31 from the
+Scraper/new\_data folder.
+
+2.1. In this step I noticed that the region did not matter in the model,
+unless the house was located at the Altadore community. So instead of
+using all variations, I decided to create a dummy variable with yes or
+no for this community.
 
 1.  Perform a statistics methodology that can predict price. Here there
-    are a fre methodologies that can be used. I chose Multilinear
-    Regression because it is a simple method and it seems to be
-    predicting well the price of the houses.
+    are a few methodologies that can be used. I chose **Multilinear
+    Regression because** in my opinion it is a simple method and it
+    seems to be predicting well the price of the houses.
 
 2.  With the model diagnostic metrics, decide which features to keep in
-    the model. Here I perfomed a Backwards methodology where I started
-    with all the metrics and then I removed one at time based on
-    higher p-values. One important point is that we need to understand
-    data correlation. Linear regression is a calculation that uses the
-    determinant of the independent variables, if we have a variable that
-    is a linear combination of others (i.e. correlated to others), the
-    determinant will be 0 and the model is not going to convert.
+    the model. Here I performed a backwards feature selections which
+    consists in including all the metrics and then removing one at time
+    based on model diagnostics. One important point is that we need to
+    understand data correlation. Linear regression is a calculation that
+    uses the determinant of the independent variables, if we have a
+    variable that is a linear combination of others (i.e. correlated to
+    others), the determinant will be 0 and the model is not going
+    to convert.
 
 3.  Now that all the tests are passing, it's time to take a step forward
-    and test if the model works for other data. This helps us to
-    avoid overfitting. I used the file \#2 to test.
+    and test if the model works for other data. This helps us to avoid
+    over fitting. I used the file \#2 from the Scraper/new\_data folder
+    to test.
 
 4.  Last but not least let's see how far away we got the price from what
-    was solf for.
+    was sold for.
 
 In the future
 =============
@@ -69,9 +77,9 @@ seller is willing to go as low as 90% of the listing, it will take 30
 days to sell, but if the seller agrees to go to 70% of the listing then
 it might sell in 5 days.
 
-We would also want to understand how the houses are distribuited by zip
+We would also want to understand how the houses are distributed by zip
 code per attribute, for example, houses in one single neighborhood might
-be more modern and therfore has a specific price point.
+be more modern and therefore has a specific price point.
 
 last but not least, economic indicator such as employment rate, growing
 economy are things that are related to the real estate market.
@@ -90,7 +98,7 @@ The data we are working on looks like the sample below:
     ## 6     624923          2     655000             6  64    Other
 
 And before we start, it is important to understand outliers and how the
-sold.Price values are distribuited. A box plo9t helps to see that:
+sold.Price values are distributed. A box plot helps to see that:
 ![](readme_files/figure-markdown_strict/unnamed-chunk-2-1.png)
 
 We can see that there are a few houses skewed towards the $2M value. In
@@ -98,9 +106,9 @@ the distribution this is even more evident:
 
 ![](readme_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
-Now we have an idea that we are working with outliers, idealy we want to
-treat the outliers because they will affect the model. For now, I will
-leave them there for study purposes.
+Now we have an idea that we are working with outliers, ideally we want
+to treat the outliers because they will affect the model. For now, I
+will leave them there for study purposes.
 
 Modeling
 ========
@@ -176,7 +184,7 @@ see what is happening with that one house:
     ##     sold_price_new percentage
     ## 118        6121488   14.69612
 
-Basically when the realtor typed the number of parking spots there was a
+Basically when the Realtor typed the number of parking spots there was a
 mistake (it is almost impossible one house to have 1423 parking spots)
 and therefore the model is having a hard time to predict the price.
 
