@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\nlibrary(corrplot)\n\n#setwd(\"C:/localhost/99-Personal/Internal Applications/go_properly\")\n\n#function to clean dataframe\nclean_dataframe<-function(df){\n  df<- df%>%\n    mutate(altadore = case_when(\n      grepl('Altadore', Community) ~ 'Altadore',\n      TRUE ~ 'Other'))%>%\n    select(-X, -Property.Type, -Building.Type, -Beds.Total, - Tax.Amount, -Yr.Built, -Community, -Front.Exposure, -Basement.Development, -Construction.Type, -Exterior, -Goods.Included, -Heating.Fuel,\n           -Parking, -Style, -day_sold, -postal_code, -Tot.Flr.Area.A.G...SF.)\n\n  return(df)  \n}\n\n#we can now choose how many files we want to run the analysis\nconcatenate_files <- function(directory, ids) {\n  # locate the files\n  files <- list.files(directory, full.names=T)[ids]\n  \n  # read the files into a list of data.frames\n  data.list <- lapply(files, read.csv)\n  \n  # concatenate into one big data.frame\n  data.cat <- do.call(rbind, data.list)\n  \n  return(data.cat)\n  \n  # aggregate\n  # data.agg <- aggregate(value ~ index, data.cat, mean)\n}\n\npath = 'Scraper\\\\new_data'\n\n#loading training data where we will perform the modeling\ntraining<- read.csv(paste(path,'\\\\file_1.csv', sep=''))\ntraining<- clean_dataframe(training)\nsaveRDS(training, 'code\\\\training.RDS')\n\n#testing model data we will test the model\ntesting<- read.csv(paste(path,'\\\\file_2.csv', sep=''))\ntesting<- clean_dataframe(testing)\n\nsaveRDS(testing, 'testing.RDS')\n\n#how are the prices distributed\n#from here we observe a few outliers above $1,5M\nboxplot(training$Sold.Price)\n\n\n\n#check if selling price is normal distribuited\nplot(density(training$Sold.Price), main=\"Density Plot: Sold Price\", \n     ylab=\"Frequency\", sub=paste(\"Skewness:\", round(e1071::skewness(training$Sold.Price), 2))) \n\npolygon(density(training$Sold.Price), col=\"blue\")\n\n\n#multilinear regression\n\ndata_names = names(training)\ndata_size = length(training)\n\nregression_function = paste(data_names[1], '~', paste(data_names[2:data_size], collapse = '+'))\nregression_function = as.formula(regression_function)\n\n\n\nlinearMod <- glm(regression_function, data=training)\n#print(linearMod) \nsummary(linearMod)\n\n\n\n\n#testing the coefficients in the new model\ntesting$sold_price_new<-predict(linearMod, type = \"response\", newdata= testing)\n\npred<-abs((testing$sold_price_new-testing$Sold.Price)/testing$Sold.Price)\npred_table<-table(round(pred,2))\nprint(paste(\"Prediction Table for validation\", i))\nprint(pred_table)\n\n\n#confusion matrix\nc<-table(factor(round(testing$sold_price_new),levels=3:8), testing$Sold.Price)\n\n\n\n\n\n#print output in a text file\n#out <- capture.output(summary(linearMod))\n#cat(\"My title\", out, file=\"regression_output.txt\", sep=\"\\n\", append=TRUE)\n\n\n\n",
+    "created" : 1521753429498.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1290931532",
+    "id" : "D642D67E",
+    "lastKnownWriteTime" : 1522091015,
+    "last_content_update" : 1522091015955,
+    "path" : "C:/localhost/99-Personal/Internal Applications/go_properly/code/data_analysis.R",
+    "project_path" : "data_analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
