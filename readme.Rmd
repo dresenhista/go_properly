@@ -3,7 +3,10 @@ title: "House Pricing problem: Calgary"
 author: "Andresa Andrade"
 date: "March 26, 2018"
 output:
-  md_document: default
+  html_fragment: default
+  md_document:
+    variant: markdown_github
+    pandoc_args: "--no-wrap"
 ---
 
 
